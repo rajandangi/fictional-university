@@ -40,7 +40,7 @@ function university_post_types()
 		'show_in_menu' => true,
 		'show_in_rest' => true,
 		'labels'    => array(
-			'name'  => 'Programs',
+			'name'  => 'Professors',
 			'add_new_item' => 'Add New Professor',
 			'edit_item' => 'Edit Professor',
 			'all_items' => 'All Professors',

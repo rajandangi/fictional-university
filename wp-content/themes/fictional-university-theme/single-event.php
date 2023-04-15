@@ -1,7 +1,7 @@
 <?php
-get_header();
-while (have_posts()) :
-    the_post();
+get_header(); //get header.php
+while (have_posts()) : //loop through posts
+the_post(); //get post data
 ?>
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('images/ocean.jpg'); ?>)"></div>
@@ -21,7 +21,24 @@ while (have_posts()) :
         <div class="generic-content">
             <?php the_content(); ?>
         </div>
+
+        <?php
+    // Get the related programs from ACF
+    $relatedPrograms = get_field('related_programs'); 
+    // Check if related programs exist
+    if($relatedPrograms) { 
+        echo '<hr class="section-break">';
+        echo '<h2 class="headline headline--medium">Related Program(s)</h2>';
+        echo '<ul class="link-list min-list">';
+        // Loop through related programs
+        foreach($relatedPrograms as $program) { 
+        ?>
+            <!-- Output related program -->
+            <li><a href="<?php echo get_the_permalink($program);?>"> <?php echo get_the_title($program); ?></a></li>
+        <?php } 
+        echo '</ul>';
+    } ?>
     </div>
 <?php
 endwhile;
-get_footer();
+get_footer(); //get footer.php

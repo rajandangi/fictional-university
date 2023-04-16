@@ -1,7 +1,7 @@
 <?php
 function university_post_types()
 {
-    // Event Post Tyoe
+    // Event Post Type
     register_post_type('event', array(
         'rewrite'   => array('slug' => 'events'),
         'supports'  => array('title', 'editor', 'excerpt'),
@@ -16,6 +16,7 @@ function university_post_types()
             'singular_name' => 'Event'
         ),
         'menu_icon' => 'dashicons-calendar'
+	    
     ));
     // Program Post Type
     register_post_type('program', array(
@@ -35,7 +36,7 @@ function university_post_types()
     ));
 	//Professor post type
 	register_post_type('professor', array(
-		'supports'  => array('title', 'editor'),
+		'supports'  => array('title', 'editor','thumbnail'),
 		'public'    => true,
 		'show_in_menu' => true,
 		'show_in_rest' => true,

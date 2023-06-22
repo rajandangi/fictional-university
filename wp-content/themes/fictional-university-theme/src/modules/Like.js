@@ -1,3 +1,4 @@
+import $ from 'jquery';
 class Like {
     constructor() {
         this.events();
@@ -5,7 +6,7 @@ class Like {
     events() {
         $(".like-box").on("click", this.ourClickDispatcher.bind(this));
     }
-    
+
     //methods
     ourClickDispatcher(e) {
         var currentLikeBox = $(e.target).closest(".like-box");
@@ -15,11 +16,29 @@ class Like {
             this.createLike(currentLikeBox);
         }
     }
-    createLike(currentLikeBox) {
-        alert("create");
+    createLike() {
+        $.ajax({
+            url: universityData.root_url + '/wp-json/university/v1/manageLike',
+            type: 'POST',
+            success: (response) => {
+                console.log(response);
+            },
+            error: (response) => {
+                console.log(response);
+            }
+        });
     }
-    deleteLike(currentLikeBox) {
-        alert("delete");
+    deleteLike() {
+        $.ajax({
+            url: universityData.root_url + '/wp-json/university/v1/manageLike',
+            type: 'DELETE',
+            success: (response) => {
+                console.log(response);
+            },
+            error: (response) => {
+                console.log(response);
+            }
+        });
     }
 }
 export default Like;

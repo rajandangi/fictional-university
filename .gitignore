@@ -4,3 +4,4 @@
 .vscode/
 .htaccess
 wp-content/themes/fictional-university-theme/node_modules
+wp-content/themes/fictional-university-theme/build

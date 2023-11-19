@@ -46,7 +46,7 @@ function university_post_types()
         array(
             'rewrite' => array('slug' => 'programs'),
             //archive page url
-            'supports' => array('title', 'editor'),
+            'supports' => array('title'),
             'has_archive' => true,
             // to create arcive page
             'public' => true,

@@ -125,3 +125,47 @@ function universityMapKey($api)
 }
 
 add_action('acf/fields/google_map/api', 'universityMapKey');
+
+
+
+
+// Pixelkey Algolioa
+add_filter('initialize_algolia_key', function () {
+	$algolia_key = [
+		'appId' => ALGOLIA_APP_ID,
+		'apiKey' => ALGOLIA_API_KEY,
+	];
+	return $algolia_key;
+}, 10, 1);
+
+
+add_filter('algolia_index_name', function ($post_type = 'post') {
+	return 'fictional_university';
+}, 10, 1);
+
+
+/**
+ * This filter is used by the Pixelkey-Algolia plugin.
+ * @param \WP_Post $post The post object to serialize.
+ * @return array The serialized post object.
+ */
+function algolia_post_to_record(WP_Post $post)
+{
+	$tags = array_map(function (WP_Term $term) {
+		return $term->name;
+	}, wp_get_post_terms($post->ID, 'post_tag'));
+
+	return [
+		'objectID' => implode('#', [$post->post_type, $post->ID]),
+		'title' => $post->post_title,
+		'author' => [
+			'id' => $post->post_author,
+			'name' => get_user_by('ID', $post->post_author)->display_name,
+		],
+		'excerpt' => $post->post_excerpt,
+		'content' => strip_tags($post->post_content),
+		'tags' => $tags,
+		'url' => get_post_permalink($post->ID),
+	];
+}
+add_filter('post_to_record', 'algolia_post_to_record');

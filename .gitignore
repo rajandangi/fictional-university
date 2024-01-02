@@ -1,0 +1,16 @@
+# Do not ignore .gitignore
+!.gitignore
+
+# Ignore everything
+*
+
+# Unignore specific wp-content subdirectories and their contents
+!wp-content/themes/**
+!wp-content/uploads/** 
+!wp-content/mu-plugins/**
+!README.md
+# Ignore specific folders even if they are inside the unignored directories
+wp-content/themes/*/node_modules/
+wp-content/themes/fictional-university-theme/build/
+.DS_Store
+!.gitignore

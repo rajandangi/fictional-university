@@ -126,46 +126,61 @@ function universityMapKey($api)
 
 add_action('acf/fields/google_map/api', 'universityMapKey');
 
+// Redirect subscriber accounts out of admin and onto homepage
+add_action('admin_init', 'redirectSubsToFrontend');
+function redirectSubsToFrontend()
+{
+	$ourCurrentUser = wp_get_current_user();
+	if (count($ourCurrentUser->roles) === 1 && $ourCurrentUser->roles[0] == 'subscriber') {
+		wp_redirect(site_url('/'));
+		exit;
+	}
+}
+// Remove admin bar for subscribers
+add_action('wp_loaded', 'noSubsAdminBar');
+function noSubsAdminBar()
+{
+	$ourCurrentUser = wp_get_current_user();
+	if (count($ourCurrentUser->roles) === 1 && $ourCurrentUser->roles[0] == 'subscriber') {
+		show_admin_bar(false);
+	}
+}
 
-
-
-// Pixelkey Algolioa
-add_filter('initialize_algolia_key', function () {
-	$algolia_key = [
-		'appId' => ALGOLIA_APP_ID,
-		'apiKey' => ALGOLIA_API_KEY,
-	];
-	return $algolia_key;
-}, 10, 1);
-
-
-add_filter('algolia_index_name', function ($post_type = 'post') {
-	return 'fictional_university';
-}, 10, 1);
-
+// Customize Login Screen
+add_filter('login_headerurl', 'ourHeaderUrl');
+function ourHeaderUrl()
+{
+	return esc_url(site_url('/'));
+}
 
 /**
- * This filter is used by the Pixelkey-Algolia plugin.
- * @param \WP_Post $post The post object to serialize.
- * @return array The serialized post object.
+ * Enqueues custom CSS styles for the login page.
+ *
+ * This function is hooked to the 'login_enqueue_scripts' action and is responsible for
+ * enqueueing the necessary CSS styles for the login page. It adds styles for custom Google fonts,
+ * Font Awesome icons, and the main and extra stylesheets of the theme.
+ *
+ * @since 1.0.0
  */
-function algolia_post_to_record(WP_Post $post)
+add_action('login_enqueue_scripts', 'ourLoginCSS');
+function ourLoginCSS()
 {
-	$tags = array_map(function (WP_Term $term) {
-		return $term->name;
-	}, wp_get_post_terms($post->ID, 'post_tag'));
-
-	return [
-		'objectID' => implode('#', [$post->post_type, $post->ID]),
-		'title' => $post->post_title,
-		'author' => [
-			'id' => $post->post_author,
-			'name' => get_user_by('ID', $post->post_author)->display_name,
-		],
-		'excerpt' => $post->post_excerpt,
-		'content' => strip_tags($post->post_content),
-		'tags' => $tags,
-		'url' => get_post_permalink($post->ID),
-	];
+	wp_enqueue_style(
+		'custom_google_fonts',
+		'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i'
+	);
+	wp_enqueue_style('font_awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+	wp_enqueue_style('university_main_styles', get_theme_file_uri('build/style-index.css'));
+	wp_enqueue_style('university_extra_styles', get_theme_file_uri('build/index.css'));
 }
-add_filter('post_to_record', 'algolia_post_to_record');
+
+/**
+ * Sets the login header title to the site name.
+ *
+ * @return string The site name.
+ */
+add_filter('login_headertitle', 'ourLoginTitle');
+function ourLoginTitle()
+{
+	return get_bloginfo('name');
+}

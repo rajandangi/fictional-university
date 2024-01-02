@@ -1,13 +1,22 @@
 # Ignore everything
 *
 
-# Unignore specific wp-content subdirectories and their contents
+# Do not ignore .gitignore
+!.gitignore
+
+# Unignore specific wp-content subdirectories
+!wp-content/
+!wp-content/themes/
+!wp-content/uploads/
+!wp-content/mu-plugins/
+
+# Unignore contents of specific wp-content subdirectories
 !wp-content/themes/**
 !wp-content/uploads/** 
 !wp-content/mu-plugins/**
 !README.md
+
 # Ignore specific folders even if they are inside the unignored directories
-**/.DS_Store
-wp-content/themes/*/node_modules/
 wp-content/themes/fictional-university-theme/build/
-!.gitignore
+**/.DS_Store
+**/node_modules/

@@ -1,6 +1,3 @@
-# Do not ignore .gitignore
-!.gitignore
-
 # Ignore everything
 *
 
@@ -10,7 +7,7 @@
 !wp-content/mu-plugins/**
 !README.md
 # Ignore specific folders even if they are inside the unignored directories
+**/.DS_Store
 wp-content/themes/*/node_modules/
 wp-content/themes/fictional-university-theme/build/
-.DS_Store
 !.gitignore

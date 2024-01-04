@@ -147,6 +147,14 @@ function noSubsAdminBar()
 }
 
 // Customize Login Screen
+
+/**
+ * Sets the login header URL.
+ *
+ * This function is used as a filter for the 'login_headerurl' hook. It returns the URL of the site's homepage.
+ *
+ * @return string The URL of the site's homepage.
+ */
 add_filter('login_headerurl', 'ourHeaderUrl');
 function ourHeaderUrl()
 {

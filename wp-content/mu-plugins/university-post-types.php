@@ -111,7 +111,6 @@ function university_post_types()
             'supports' => array('title'),
             'public' => false,
             'show_ui' => true,
-            'show_in_rest' => true,
             'labels' => array(
                 'name' => 'Likes',
                 'add_new_item' => 'Add New Like',

@@ -1,6 +1,6 @@
 <?php
 get_header(); //get header.php
-while ( have_posts() ) : //loop through posts
+while (have_posts()): //loop through posts
 	the_post(); //get post data
 	pageBanner(); //page banner, title and subtitle
 	?>
@@ -8,7 +8,7 @@ while ( have_posts() ) : //loop through posts
 		<div class="generic-content">
 			<div class="row group">
 				<div class="one-third">
-					<?php the_post_thumbnail( 'professorPortrait' ); ?>
+					<?php the_post_thumbnail('professorPortrait'); ?>
 				</div>
 				<div class="two-third">
 					<?php
@@ -48,36 +48,42 @@ while ( have_posts() ) : //loop through posts
 					}
 					?>
 					<span class="like-box" data-like="<?php if (isset($existQuery->posts[0]->ID))
-						echo $existQuery->posts[0]->ID; ?>" data-professor="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
+						echo $existQuery->posts[0]->ID; ?>" data-professor="<?php the_ID(); ?>"
+						data-exists="<?php echo $existStatus; ?>">
 						<i class="fa fa-heart-o" aria-hidden="true"></i>
 						<i class="fa fa-heart" aria-hidden="true"></i>
 						<span class="like-count">
-							<?php echo $likeCount->found_posts; ?>
+							<?php
+							// The number of found posts for the current query.
+							echo $likeCount->found_posts;
+							?>
 						</span>
 					</span>
 					<?php the_content(); ?>
 				</div>
 			</div>
 		</div>
-		
+
 		<?php
 		// Get the related programs from ACF
-		$relatedPrograms = get_field( 'related_programs' );
+		$relatedPrograms = get_field('related_programs');
 		// Check if related programs exist
-		if ( $relatedPrograms ) {
+		if ($relatedPrograms) {
 			echo '<hr class="section-break">';
 			echo '<h2 class="headline headline--medium">Subject(s) Taught</h2>';
 			echo '<ul class="link-list min-list">';
 			// Loop through related programs
-			foreach ( $relatedPrograms as $program ) {
+			foreach ($relatedPrograms as $program) {
 				?>
 				<!-- Output related program -->
-				<li><a href="<?php echo get_the_permalink( $program ); ?>"> <?php echo get_the_title( $program ); ?></a>
+				<li><a href="<?php echo get_the_permalink($program); ?>">
+						<?php echo get_the_title($program); ?>
+					</a>
 				</li>
 			<?php }
 			echo '</ul>';
 		} ?>
 	</div>
-<?php
+	<?php
 endwhile;
 get_footer(); //get footer.php

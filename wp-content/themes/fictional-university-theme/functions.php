@@ -3,6 +3,17 @@
 require get_theme_file_path('/inc/search-route.php');
 require get_theme_file_path('/inc/like-route.php');
 
+
+/**
+ * Registers custom REST fields for the 'post' and 'note' endpoints.
+ *
+ * This function is hooked into the 'rest_api_init' action and adds two custom fields:
+ * - 'authorName' for the 'post' endpoint, which returns the name of the post author.
+ * - 'userNoteCount' for the 'note' endpoint, which returns the number of notes created by the current user.
+ *
+ * @since 1.0.0
+ */
+add_action('rest_api_init', 'university_custom_rest');
 function university_custom_rest()
 {
 	register_rest_field(
@@ -14,8 +25,17 @@ function university_custom_rest()
 			}
 		)
 	);
+	register_rest_field(
+		'note',
+		'userNoteCount',
+		array(
+			'get_callback' => function () {
+				return count_user_posts(get_current_user_id(), 'note');
+			}
+		)
+	);
 }
-add_action('rest_api_init', 'university_custom_rest');
+
 
 function pageBanner($args = null)
 {

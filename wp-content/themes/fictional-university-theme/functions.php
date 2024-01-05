@@ -231,5 +231,3 @@ function makeNotePrivate($data, $postarr)
 	return $data;
 }
 
-
-

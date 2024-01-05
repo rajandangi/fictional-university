@@ -8,6 +8,7 @@
 !wp-content/
 !wp-content/themes/
 !wp-content/uploads/
+!wp-content/plugins/
 !wp-content/mu-plugins/
 
 # Unignore contents of specific wp-content subdirectories
@@ -15,6 +16,10 @@
 !wp-content/uploads/** 
 !wp-content/mu-plugins/**
 !README.md
+
+# Unignore specific Plugins
+!wp-content/plugins/our-first-unique-plugin/
+!wp-content/plugins/our-first-unique-plugin/**
 
 # Ignore specific folders even if they are inside the unignored directories
 wp-content/themes/fictional-university-theme/build/

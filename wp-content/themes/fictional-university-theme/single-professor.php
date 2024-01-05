@@ -47,6 +47,7 @@ while (have_posts()): //loop through posts
 						}
 					}
 					?>
+					<!-- data-like is the ID of the like post of current user. Which is used to delete the like post of a current user. -->
 					<span class="like-box" data-like="<?php if (isset($existQuery->posts[0]->ID))
 						echo $existQuery->posts[0]->ID; ?>" data-professor="<?php the_ID(); ?>"
 						data-exists="<?php echo $existStatus; ?>">

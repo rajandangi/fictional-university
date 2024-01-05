@@ -28,7 +28,10 @@ class Like {
 
     async createLike(currentLikeBox) {
         try {
-            const response = await axios.post(universityData.root_url + "/wp-json/university/v1/manageLike", { "professorId": currentLikeBox.getAttribute("data-professor") })
+            const data = { "professorId": currentLikeBox.getAttribute("data-professor") }
+
+            const response = await axios.post(universityData.root_url + "/wp-json/university/v1/manageLike", data)
+
             if (response.data != "Only logged in users can create a like.") {
                 currentLikeBox.setAttribute("data-exists", "yes")
                 var likeCount = parseInt(currentLikeBox.querySelector(".like-count").innerHTML, 10)

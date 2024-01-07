@@ -22,22 +22,22 @@ class WordCountAndTimeContentFilter
 
     function createHTML($content)
     {
-        $html = '<h3>' . esc_html(get_option('wcp_headline', __('Post Statistics', 'wcdomain'))) . '</h3><p>';
+        $html = '<h3>' . esc_html(get_option('wcp_headline', esc_html__('Post Statistics', 'wcdomain'))) . '</h3><p>';
         // get word count once because both wordcount and read time will need it
         if (get_option('wcp_wordcount', '1') or get_option('wcp_readtime', '1')) {
             // strip_tags removes html tags from content before counting words
             $wordCount = str_word_count(strip_tags($content));
         }
         if (get_option('wcp_wordcount', '1')) {
-            $html .= __('Words:', 'wcdomain') . ' ' . $wordCount . '<br>';
+            $html .= esc_html__('Words:', 'wcdomain') . ' ' . $wordCount . '<br>';
         }
         if (get_option('wcp_charactercount', '1')) {
-            $html .= __('Characters:', 'wcdomain') . '' . strlen(strip_tags($content)) . '<br>';
+            $html .= esc_html__('Characters:', 'wcdomain') . '' . strlen(strip_tags($content)) . '<br>';
         }
 
         if (get_option('wcp_readtime', '1')) {
             // 225 is the average reading speed in words per minute (wpm) for adults according to Wikipedia
-            $html .= __('Time to read:', 'wcdomain') . '' . round($wordCount / 225) . ' minute(s)<br>';
+            $html .= esc_html__('Time to read:', 'wcdomain') . '' . round($wordCount / 225) . ' minute(s)<br>';
         }
 
         $html .= '</p>';

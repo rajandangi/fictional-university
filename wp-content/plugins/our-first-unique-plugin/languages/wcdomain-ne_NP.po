@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: Our First Unique Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-07 10:29+0000\n"
-"PO-Revision-Date: 2024-01-07 10:35+0000\n"
+"PO-Revision-Date: 2024-01-07 10:49+0000\n"
 "Last-Translator: Rajan Dangi\n"
-"Language-Team: Nepali\n"
+"Language-Team: नेपाली\n"
 "Language: ne_NP\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,10 @@ msgstr ""
 msgid "Characters:"
 msgstr "अक्षर :"
 
+#: our-first-unique-plugin.php:31
+msgid "Display Location"
+msgstr "देखाउने ठाउँ "
+
 #. URI of the plugin
 #. Author URI of the plugin
 msgid "https://www.rajandangi.com.np"
@@ -28,6 +32,10 @@ msgstr "https://www.rajandangi.com.np"
 msgid "Our First Unique Plugin"
 msgstr "हाम्रो पहिलो अनौठो प्लगिन "
 
+#: inc/word-count.php:25
+msgid "Post Statistics"
+msgstr "पोस्ट तथ्याँक "
+
 #. Author of the plugin
 msgid "Rajan Dangi"
 msgstr "राजन डाँगी "
@@ -35,6 +43,10 @@ msgstr "राजन डाँगी "
 #. Description of the plugin
 msgid "This is our first unique plugin"
 msgstr "यो हाम्रो पहिलो अनौठो प्लगिन हो "
+
+#: inc/word-count.php:40
+msgid "Time to read:"
+msgstr "पढ्ने लाग्ने समय :"
 
 #: our-first-unique-plugin.php:80
 msgid "Word Count"

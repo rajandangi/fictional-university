@@ -28,7 +28,7 @@ class WordCountAndTimePlugin
         add_settings_section('wcp_first_section', null, null, 'word-count-settings-page');
 
         // Select
-        add_settings_field('wcp_location', __('Display Location', 'wcdomain'), array($this, 'locationHtml'), 'word-count-settings-page', 'wcp_first_section');
+        add_settings_field('wcp_location', esc_html__('Display Location', 'wcdomain'), array($this, 'locationHtml'), 'word-count-settings-page', 'wcp_first_section');
         register_setting('wordcountplugin', 'wcp_location', array('sanitize_callback' => array($this, 'sanitizeLocation'), 'default' => '0'));
 
         // Text Field

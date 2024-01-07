@@ -22,9 +22,11 @@ class WordCountAndTimePlugin
         // Select
         add_settings_field('wcp_location', 'Display Location', array($this, 'locationHtml'), 'word-count-settings-page', 'wcp_first_section');
         register_setting('wordcountplugin', 'wcp_location', array('sanitize_callback' => array($this, 'sanitizeLocation'), 'default' => '0'));
+
         // Text Field
         add_settings_field('wcp_headline', 'Headline Text', array($this, 'headlineHtml'), 'word-count-settings-page', 'wcp_first_section');
         register_setting('wordcountplugin', 'wcp_headline', array('sanitize_callback' => 'sanitize_text_field', 'default' => 'Post Statistics'));
+
         // Checkbox
         add_settings_field('wcp_wordcount', 'Word Count', array($this, 'checkboxHtml'), 'word-count-settings-page', 'wcp_first_section', array('theName' => 'wcp_wordcount'));
         register_setting('wordcountplugin', 'wcp_wordcount', array('sanitize_callback' => 'sanitize_text_field', 'default' => '1'));
@@ -86,4 +88,9 @@ class WordCountAndTimePlugin
 
 }
 $wordCountAndTimePlugin = new WordCountAndTimePlugin();
+
+
+
+// Implement Word Count and Time Plugin on the front end of the website using the_content filter
+require_once plugin_dir_path(__FILE__) . 'inc/word-count.php';
 

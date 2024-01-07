@@ -6,6 +6,8 @@ Description: This is our first unique plugin
 Author: Rajan Dangi
 Version: 1.0
 Author URI: https://www.rajandangi.com.np
+Text Domain: wcdomain
+Domain Path: /languages
 */
 class WordCountAndTimePlugin
 {
@@ -13,6 +15,12 @@ class WordCountAndTimePlugin
     {
         add_action('admin_menu', array($this, 'adminPage'));
         add_action('admin_init', array($this, 'settings'));
+        add_action('init', array($this, 'languages'));
+    }
+
+    function languages()
+    {
+        load_plugin_textdomain('wcdomain', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 
     function settings()
@@ -20,7 +28,7 @@ class WordCountAndTimePlugin
         add_settings_section('wcp_first_section', null, null, 'word-count-settings-page');
 
         // Select
-        add_settings_field('wcp_location', 'Display Location', array($this, 'locationHtml'), 'word-count-settings-page', 'wcp_first_section');
+        add_settings_field('wcp_location', __('Display Location', 'wcdomain'), array($this, 'locationHtml'), 'word-count-settings-page', 'wcp_first_section');
         register_setting('wordcountplugin', 'wcp_location', array('sanitize_callback' => array($this, 'sanitizeLocation'), 'default' => '0'));
 
         // Text Field
@@ -69,7 +77,7 @@ class WordCountAndTimePlugin
 
     function adminPage()
     {
-        add_options_page('Word Count Settings', 'Word Count', 'manage_options', 'word-count-settings-page', array($this, 'ourHtml'));
+        add_options_page('Word Count Settings', __('Word Count', 'wcdomain'), 'manage_options', 'word-count-settings-page', array($this, 'ourHtml'));
     }
 
     function ourHTML()

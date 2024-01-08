@@ -83,8 +83,7 @@ class OurWordFilterPlugin
         $badWords = explode(',', get_option('plugin_words_to_filter'));
         // remove whitespace from each word using array_map() and trim()
         $badWordsTrimmed = array_map('trim', $badWords);
-        $newContent = str_ireplace($badWordsTrimmed, esc_html(get_option('replacementText', '****')), $content);
-        return $newContent;
+        return str_ireplace($badWordsTrimmed, esc_html(get_option('replacementText', '****')), $content);
     }
 
     /**

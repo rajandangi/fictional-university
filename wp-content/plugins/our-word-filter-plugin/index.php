@@ -22,6 +22,69 @@ class OurWordFilterPlugin
          * Adds an action hook to the 'admin_menu' event, which calls the 'ourMenu' method of the current class.
          */
         add_action('admin_menu', array($this, 'ourMenu'));
+
+        /**
+         * Adds an action hook to initialize the plugin settings in the admin area.
+         *
+         * @since 1.0.0
+         */
+        add_action('admin_init', array($this, 'ourSettings'));
+
+        /**
+         * Adds a filter to the content of the WordPress posts.
+         * This filter is responsible for applying the word filtering logic.
+         *
+         * @param string $content The content of the post.
+         * @return string The filtered content.
+         */
+        if (get_option('plugin_words_to_filter')):
+            add_action('the_content', array($this, 'filterLogic'));
+        endif;
+    }
+
+    /**
+     * Defines the ourSettings function.
+     * Adds a settings section and field for filtered text replacement.
+     */
+    function ourSettings()
+    {
+        add_settings_section('replacemnet-text-section', null, null, 'word-filter-options');
+
+        add_settings_field('replacement-text', 'Filtered Text', array($this, 'replacementTextHtml'), 'word-filter-options', 'replacemnet-text-section');
+        register_setting('replacementFields', 'replacementText');
+    }
+
+    /**
+     * Displays the HTML markup for the replacement text input field.
+     *
+     * This function outputs an HTML input field for the replacement text option in the plugin settings.
+     * The value of the input field is set to the current value of the 'replacementText' option, also default value
+     *
+     * @since 1.0.0
+     */
+    function replacementTextHtml()
+    {
+        ?>
+        <input type="text" name="replacementText" value="<?php echo esc_attr(get_option('replacementText', '***')); ?>">
+        <p class="description">
+            <?php echo esc_html__('Leave blank to simply remove the filtered words.', 'wfdomain'); ?>
+        </p>
+        <?php
+    }
+
+    /**
+     * Applies word filtering logic to the given content.
+     *
+     * @param string $content The content to be filtered.
+     * @return string The filtered content.
+     */
+    function filterLogic($content)
+    {
+        $badWords = explode(',', get_option('plugin_words_to_filter'));
+        // remove whitespace from each word using array_map() and trim()
+        $badWordsTrimmed = array_map('trim', $badWords);
+        $newContent = str_ireplace($badWordsTrimmed, esc_html(get_option('replacementText', '****')), $content);
+        return $newContent;
     }
 
     /**
@@ -112,7 +175,8 @@ class OurWordFilterPlugin
 
     /**
      * Displays the word filter page.
-     *
+     *  It uses custom HTML markup to render the form.
+     *  It also handles the form submission using the custom handleForm method.
      * @return void
      */
     function wordFilterPage()
@@ -141,10 +205,24 @@ class OurWordFilterPlugin
         <?php
     }
 
+    /**
+     * Renders the options subpage for the Word Filter plugin.
+     * It uses the WordPress Settings API to render the form.
+     */
     function optionsSubPage()
-    {
-        echo '<h1>Options</h1>';
-    }
+    { ?>
+        <div class="wrap">
+            <h1>Word Filter Options</h1>
+            <form action="options.php" method="post">
+                <?php
+                settings_errors();
+                settings_fields('replacementFields');
+                do_settings_sections('word-filter-options');
+                submit_button();
+                ?>
+            </form>
+        </div>
+    <?php }
 
 }
 $ourWordFilterPlugin = new OurWordFilterPlugin();

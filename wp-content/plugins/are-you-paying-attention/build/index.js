@@ -2,6 +2,18 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/index.scss":
+/*!************************!*\
+  !*** ./src/index.scss ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "react":
 /*!************************!*\
   !*** external "React" ***!
@@ -9,6 +21,16 @@
 /***/ ((module) => {
 
 module.exports = window["React"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
 
 /***/ })
 
@@ -89,6 +111,11 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
   title: "Are you paying attention?",
@@ -102,54 +129,44 @@ wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
       type: "string"
     }
   },
-  edit: function (props) {
-    function updateSkyColor(event) {
-      props.setAttributes({
-        skyColor: event.target.value
-      });
-    }
-    function updateGrassColor(event) {
-      props.setAttributes({
-        grassColor: event.target.value
-      });
-    }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      type: "text",
-      placeholder: "sky color",
-      value: props.attributes.skyColor,
-      onChange: updateSkyColor
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      type: "text",
-      placeholder: "grass color",
-      value: props.attributes.grassColor,
-      onChange: updateGrassColor
-    }));
-  },
+  edit: EditComponent,
   save: function (props) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Today the sky is ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "skyColor"
-    }, props.attributes.skyColor), " and the grass is ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "grassColor"
-    }, props.attributes.grassColor), ".");
-  },
-  deprecated: [{
-    attributes: {
-      skyColor: {
-        type: "string"
-      },
-      grassColor: {
-        type: "string"
-      }
-    },
-    save: function (props) {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Today the sky is ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-        className: "skyColor"
-      }, props.attributes.skyColor), " and the grass is ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-        className: "grassColor"
-      }, props.attributes.grassColor), ".");
-    }
-  }]
+    return null;
+  }
 });
+function EditComponent(props) {
+  function updateSkyColor(event) {
+    props.setAttributes({
+      skyColor: event.target.value
+    });
+  }
+  function updateGrassColor(event) {
+    props.setAttributes({
+      grassColor: event.target.value
+    });
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "paying-attention-edit-block"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: "Question",
+    style: {
+      fontSize: "20px"
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    style: {
+      fontSize: "13px",
+      margin: "20 0 8px 0"
+    }
+  }, "Answers:"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexBlock, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
+    className: "mark-as-correct",
+    icon: "star-empty"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    isLink: true,
+    className: "attention-delete"
+  }, "Delete"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "primary"
+  }, "Add Another Answer"));
+}
 })();
 
 /******/ })()

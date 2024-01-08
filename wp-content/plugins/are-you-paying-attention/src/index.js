@@ -1,3 +1,6 @@
+import "./index.scss"
+import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon } from "@wordpress/components"
+
 wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
     title: "Are you paying attention?",
     icon: "smiley",
@@ -6,34 +9,36 @@ wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
         skyColor: { type: "string" },
         grassColor: { type: "string" }
     },
-    edit: function (props) {
-        function updateSkyColor(event) {
-            props.setAttributes({ skyColor: event.target.value })
-        }
-        function updateGrassColor(event) {
-            props.setAttributes({ grassColor: event.target.value })
-        }
-        return (
-            <div>
-                <input type="text" placeholder="sky color" value={props.attributes.skyColor} onChange={updateSkyColor} />
-                <input type="text" placeholder="grass color" value={props.attributes.grassColor} onChange={updateGrassColor} />
-            </div>
-        )
-    },
+    edit: EditComponent,
     save: function (props) {
-        return (
-            <h3>Today the sky is <span className="skyColor">{props.attributes.skyColor}</span> and the grass is <span className="grassColor">{props.attributes.grassColor}</span>.</h3>
-        )
-    },
-    deprecated: [{
-        attributes: {
-            skyColor: { type: "string" },
-            grassColor: { type: "string" }
-        },
-        save: function (props) {
-            return (
-                <p>Today the sky is <span className="skyColor">{props.attributes.skyColor}</span> and the grass is <span className="grassColor">{props.attributes.grassColor}</span>.</p>
-            )
-        }
-    }]
+        return null
+    }
 })
+
+
+function EditComponent(props) {
+    function updateSkyColor(event) {
+        props.setAttributes({ skyColor: event.target.value })
+    }
+    function updateGrassColor(event) {
+        props.setAttributes({ grassColor: event.target.value })
+    }
+    return (
+        <div className="paying-attention-edit-block">
+            <TextControl label="Question" style={{ fontSize: "20px" }} />
+            <p style={{ fontSize: "13px", margin: "20 0 8px 0" }}>Answers:</p>
+            <Flex>
+                <FlexBlock>
+                    <TextControl />
+                </FlexBlock>
+                <FlexItem>
+                    <Icon className="mark-as-correct" icon="star-empty" />
+                </FlexItem>
+                <FlexItem>
+                    <Button isLink className="attention-delete">Delete</Button>
+                </FlexItem>
+            </Flex>
+            <Button variant="primary">Add Another Answer</Button>
+        </div >
+    )
+}

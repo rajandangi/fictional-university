@@ -24,6 +24,8 @@
 !wp-content/plugins/our-word-filter-plugin/**
 !wp-content/plugins/are-you-paying-attention/
 !wp-content/plugins/are-you-paying-attention/**
+!wp-content/plugins/featured-professor/
+!wp-content/plugins/featured-professor/**
 
 # Ignore specific folders even if they are inside the unignored directories
 wp-content/themes/fictional-university-theme/build/

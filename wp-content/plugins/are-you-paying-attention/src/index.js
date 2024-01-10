@@ -1,6 +1,6 @@
 import "./index.scss"
 import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon, PanelBody, PanelRow, ColorPicker } from "@wordpress/components"
-import { InspectorControls } from "@wordpress/block-editor" //Register Side bar controls options for the block
+import { InspectorControls, BlockControls, AlignmentToolbar, useBlockProps } from "@wordpress/block-editor" //InspectorControls Register Side bar controls options for the block
 
 (function () {
     let locked = false
@@ -40,14 +40,21 @@ import { InspectorControls } from "@wordpress/block-editor" //Register Side bar 
 })() // it's an IIFE (Immediately Invoked Function Expression) that runs as soon as the file is loaded
 
 wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
-    title: "Are you paying attention?",
-    icon: "smiley",
-    category: "common",
     attributes: {
         question: { type: "string" },
         answers: { type: "array", default: [""] },
         correctAnswer: { type: "number", default: undefined },
-        bgColor: { type: "string", default: "#EBEBEB" }
+        bgColor: { type: "string", default: "#EBEBEB" },
+        theAlignment: { type: "string", default: "left" }
+    },
+    example: {
+        attributes: {
+            question: "What is the capital of France?",
+            answers: ["Paris", "London", "Berlin"],
+            correctAnswer: 0,
+            bgColor: "#CFE8F3",
+            theAlignment: "left"
+        }
     },
     edit: EditComponent,
     save: function (props) {
@@ -57,6 +64,11 @@ wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
 
 
 function EditComponent(props) {
+    const blockProps = useBlockProps({
+        className: "paying-attention-edit-block",
+        style: { backgroundColor: props.attributes.bgColor },
+    }) // useBlockProps() gives us the default block props that Gutenberg provides
+
     function updateQuestion(value) {
         props.setAttributes({ question: value })
     }
@@ -77,7 +89,11 @@ function EditComponent(props) {
     }
 
     return (
-        <div className="paying-attention-edit-block" style={{ backgroundColor: props.attributes.bgColor }}>
+        <div {...blockProps}>
+            <BlockControls>
+                <AlignmentToolbar value={props.attributes.theAlignment} onChange={x => props.setAttributes({ theAlignment: x })} />
+            </BlockControls>
+
             <InspectorControls>
                 <PanelBody title="Background Color" initialOpen={open}>
                     <PanelRow>

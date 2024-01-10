@@ -16,7 +16,7 @@ import { InspectorControls, BlockControls, AlignmentToolbar, useBlockProps } fro
         const results = wp.data.select("core/block-editor").getBlocks().filter(function (block) {
             return block.name == "ourplugin/are-you-paying-attention" && block.attributes.correctAnswer == undefined
         })
-        console.log(results)
+
         if (results.length && locked == false) {
             locked = true
             /**

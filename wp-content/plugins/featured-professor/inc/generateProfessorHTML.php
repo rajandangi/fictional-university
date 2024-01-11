@@ -17,7 +17,7 @@ function generateProfessorHTML($id)
             </div>
             <div class="professor-callout__text">
                 <h5>
-                    <?php the_title(); ?>
+                    <?php echo esc_html(get_the_title()); ?>
                 </h5>
                 <p>
                     <?php echo wp_trim_words(get_the_content(), 30); ?>
@@ -25,7 +25,8 @@ function generateProfessorHTML($id)
                 <?php
                 $relatedPrograms = get_field('related_programs');
                 if ($relatedPrograms) { ?>
-                    <p>Name teaches:
+                    <p>
+                        <?php echo esc_html(get_the_title()); ?> teaches:
                         <?php
                         foreach ($relatedPrograms as $key => $program) {
                             echo get_the_title($program);
@@ -40,7 +41,7 @@ function generateProfessorHTML($id)
                     <strong>
                         <a href="<?php the_permalink() ?>">
                             Learn More About
-                            <?php the_title() ?> &raquo;
+                            <?php echo esc_html(get_the_title()) ?> &raquo;
                         </a>
                     </strong>
                 </p>

@@ -7,13 +7,14 @@
 # Unignore specific wp-content subdirectories
 !wp-content/
 !wp-content/themes/
+!wp-content/themes/fictional-university-theme/
 !wp-content/uploads/
 !wp-content/plugins/
 !wp-content/mu-plugins/
 !wp-content/ai1wm-backups/
 
 # Unignore contents of specific wp-content subdirectories
-!wp-content/themes/**
+!wp-content/themes/fictional-university-theme/**
 !wp-content/uploads/** 
 !wp-content/mu-plugins/**
 !wp-content/ai1wm-backups/**

@@ -10,11 +10,13 @@
 !wp-content/uploads/
 !wp-content/plugins/
 !wp-content/mu-plugins/
+!wp-content/ai1wm-backups/
 
 # Unignore contents of specific wp-content subdirectories
 !wp-content/themes/**
 !wp-content/uploads/** 
 !wp-content/mu-plugins/**
+!wp-content/ai1wm-backups/**
 !README.md
 
 # Unignore specific Plugins

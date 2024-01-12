@@ -1,4 +1,4 @@
-# Fictional University Theme : 
+# Fictional University Theme 
 A Classic Theme. You can purchase complete Course using this [LINK](https://www.udemy.com/become-a-wordpress-developer-php-javascript/?couponCode=LEARNWEBCODESITE)
 
 ## Required plugins for this theme:

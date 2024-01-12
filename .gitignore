@@ -20,6 +20,8 @@
 !README.md
 
 # Unignore specific Plugins
+!wp-content/plugins/all-in-one-wp-migration/
+!wp-content/plugins/all-in-one-wp-migration/**
 !wp-content/plugins/our-first-unique-plugin/
 !wp-content/plugins/our-first-unique-plugin/**
 !wp-content/plugins/our-word-filter-plugin/

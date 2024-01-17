@@ -1,4 +1,27 @@
 <?php
+/**
+ * Adds custom query variables to the WordPress query.
+ *
+ * @param array $vars The array of existing query variables.
+ * @return array The modified array of query variables.
+ */
+
+/**
+ * you can access the query vars using 
+ * get_query_var('skyColor') and 
+ * get_query_var('grassColor') from anywhere in the theme
+ *
+ */
+
+add_filter('query_vars', 'universityQueryVars');
+function universityQueryVars($vars)
+{
+	$vars[] = 'skyColor';
+	$vars[] = 'grassColor';
+	return $vars;
+}
+
+
 
 require get_theme_file_path('/inc/search-route.php');
 require get_theme_file_path('/inc/like-route.php');
